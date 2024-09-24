@@ -4,31 +4,85 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bird Classification</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet"> <!-- Custom font -->
     <style>
         body {
-            background-image: url_for("send_image", filename=image_names);
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            background-size: 100% 100%;
+            /* Background image slideshow */
+            background-image: url('bird.jpg'), url('bird2.jpeg');
+            background-size: cover; /* Cover entire viewport */
+            background-repeat: no-repeat; /* No repeating */
+            animation: slide 10s infinite; /* Infinite sliding animation */
+            font-family: Arial, sans-serif; /* Default font */
+            color: #333; /* Dark gray text */
+            margin: 0; /* Remove default margin */
+            padding: 0; /* Remove default padding */
+            display: flex; /* Flexbox layout */
+            flex-direction: column; /* Column direction */
+            align-items: center; /* Center align */
+            justify-content: center; /* Center content vertically */
+            height: 100vh; /* Full viewport height */
+            overflow: hidden; /* Hide overflow */
         }
-        h1 {
-            border: 1px solid #f1f1f1;
-            margin-bottom: 25px;
+        @keyframes slide {
+            0% { background-image: url('bird.jpg'); }
+            50% { background-image: url('bird2.jpeg'); }
+            100% { background-image: url('bird.jpg'); }
+        }
+        .animated-title {
+            font-size: 4em; /* Large font size for title */
+            font-family: 'Pacifico', cursive; /* Custom font style */
+            padding: 10px; /* Padding around the title */
+            border: 2px solid #00838f; /* Dark teal border */
+            border-radius: 8px; /* Rounded corners */
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background for better readability */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+            transition: transform 0.3s, color 0.3s; /* Smooth transition */
+        }
+        .animated-title:hover {
+            animation: sparkle 0.5s forwards; /* Sparkle animation on hover */
+        }
+        @keyframes sparkle {
+            0% { color: #ffcc00; } /* Change to golden color */
+            25% { color: #ff5733; } /* Change to orange */
+            50% { color: #ffcc00; } /* Back to golden */
+            75% { color: #ff5733; } /* Change to orange */
+            100% { color: #ffcc00; } /* Back to golden */
+            transform: scale(1.1); /* Slightly enlarge */
         }
         .submit_btn {
-            padding-left: 20px;
+            margin-top: 20px; /* Space above button */
         }
-        .image {
-            padding-left: 20px;
+        input[type="file"] {
+            padding: 10px; /* Padding inside file input */
+            border: 2px solid #00838f; /* Border for file input */
+            border-radius: 5px; /* Rounded corners */
+            background-color: #ffffff; /* White background */
+            cursor: pointer; /* Pointer cursor on hover */
         }
-        .sub {
-            height: auto;
-            width: 100px;
+        input[type="submit"] {
+            padding: 10px 20px; /* Padding for button */
+            border: none; /* No border */
+            border-radius: 5px; /* Rounded corners */
+            background-color: #00838f; /* Teal background */
+            color: #ffffff; /* White text */
+            font-size: 1.2em; /* Larger font size */
+            cursor: pointer; /* Pointer cursor on hover */
+            transition: background-color 0.3s; /* Smooth transition */
+        }
+        input[type="submit"]:hover {
+            background-color: #005b5c; /* Darker teal on hover */
+        }
+        .result {
+            margin-top: 20px; /* Space above result */
+            font-size: 1.5em; /* Larger font size for result */
+            color: #ff5722; /* Orange color for result */
+            font-weight: bold; /* Bold text */
         }
     </style>
 </head>
 <body>
     <center>
+        <div class="animated-title">Bird Species Identification</div>
         <form id="upload-form" action="{{url_for('upload')}}" method="POST" enctype="multipart/form-data">
             <div class="image">
                 <h1>Upload an image:</h1>
@@ -39,7 +93,7 @@
                 <input type="submit" value="Upload!" id="upload-button">
             </div>
         </form>
-        <h1>{{value}}</h1>
+        <h1 class="result">{{value}}</h1>
     </center>
 </body>
 </html>
