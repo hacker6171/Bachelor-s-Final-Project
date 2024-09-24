@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bird Classification</title>
+    <style>
+        body {
+            background-image: url_for("send_image", filename=image_names);
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: 100% 100%;
+        }
+        h1 {
+            border: 1px solid #f1f1f1;
+            margin-bottom: 25px;
+        }
+        .submit_btn {
+            padding-left: 20px;
+        }
+        .image {
+            padding-left: 20px;
+        }
+        .sub {
+            height: auto;
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <form id="upload-form" action="{{url_for('upload')}}" method="POST" enctype="multipart/form-data">
+            <div class="image">
+                <h1>Upload an image:</h1>
+                <input id="file-picker" type="file" name="file">
+            </div>
+            <br>
+            <div class="submit_btn">
+                <input type="submit" value="Upload!" id="upload-button">
+            </div>
+        </form>
+        <h1>{{value}}</h1>
+    </center>
+</body>
+</html>
